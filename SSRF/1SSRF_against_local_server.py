@@ -56,4 +56,4 @@ if __name__ == "__main__":
     
 #to run this code
 #write in terminal
-#python3 SSRF_against_local_server.py "Url of the lab"   
+#python3 1SSRF_against_local_server.py "Url of the lab"   

