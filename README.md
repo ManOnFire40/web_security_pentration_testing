@@ -1,7 +1,8 @@
 # Exploit_Scripting
 Scripting differant Exploits
 
-SSRF
+
+#SSRF
 
 1-SSRF against local server
 
