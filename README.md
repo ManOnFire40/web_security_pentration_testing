@@ -17,3 +17,6 @@ SSRF
 CSRF
 -----------
 1-CSRF vulnerability with no defenses
+
+OWASP Juice Shop report
+-----------
